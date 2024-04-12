@@ -1,0 +1,54 @@
+@startuml
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+' User (Server Admin) outside of the Service container
+osa_user_green_operations(User, "RAG Service User", "")
+
+  ' Entities in the RAG service
+
+  database DomainSpecificDocuments {
+    folder ":document_id: varchar -> :document_path: varchar"
+    
+  }
+
+  database VectorDB {
+    folder ":document_id: varchar -> :embedding: blob"
+    
+  }
+
+  agent Embedder [
+    node "Embedder (E)"
+    :model: varchar
+    :algorithm: varchar
+  ]
+
+  agent Retriever [
+    node "Retriever (R)"
+    :search_algorithm: varchar
+    :max_results: int
+  ]
+
+  agent LLM [
+    node "Large Language Model"
+    :model_name: varchar
+    :version: varchar
+  ]
+
+  ' Relationships with directions
+  DomainSpecificDocuments -right-> Embedder : [0.1] new documents >
+  Embedder -down-> VectorDB : [0.2] new document embeddings >
+  User -down-> Retriever : [1] query >
+  Retriever -right-> Embedder : [2] query >
+  Embedder -up-> Retriever : [3] query embeddings >
+  Retriever -down-> VectorDB : [4] query embeddings >
+  VectorDB -up-> Retriever : [5] top k relevant documents >
+  Retriever -right-> LLM : [6] query + top k relevant documents >
+  LLM -up-> User : [7] completion response >
+
+@enduml
