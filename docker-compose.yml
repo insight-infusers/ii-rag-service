@@ -1,0 +1,39 @@
+services:
+  main:
+    build: ./services/main
+    ports:
+      - "3930:8000"
+    networks:
+      - rag_network
+
+  embedder:
+    build: ./services/embedder
+    ports:
+      - "3931:8000"
+    networks:
+      - rag_network
+
+  retriever:
+    build: ./services/retriever
+    ports:
+      - "3932:8000"
+    networks:
+      - rag_network
+
+  vector_db:
+    build: ./services/vector_db
+    ports:
+      - "3933:8000"
+    networks:
+      - rag_network
+
+  llm:
+    build: ./services/llm
+    ports:
+      - "3934:8000"
+    networks:
+      - rag_network
+
+networks:
+  rag_network:
+    driver: bridge
