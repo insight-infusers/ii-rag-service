@@ -1,6 +1,8 @@
 services:
   main:
-    build: ./services/main
+    build:
+      context: .
+      dockerfile: ./services/main/Dockerfile
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       # TODO: implement healthcheck
@@ -13,14 +15,18 @@ services:
       - rag_network
 
   embedder:
-    build: ./services/embedder
+    build:
+      context: .
+      dockerfile: ./services/embedder/Dockerfile
     networks:
       - rag_network
     # Internal service, accessible at embedder:8000 within rag_network
     # TODO: implement volume
 
   retriever:
-    build: ./services/retriever
+    build:
+      context: .
+      dockerfile: ./services/retriever/Dockerfile
     networks:
       - rag_network
     depends_on:
@@ -30,14 +36,18 @@ services:
     # TODO: implement volume
 
   vector_db:
-    build: ./services/vector_db
+    build:
+      context: .
+      dockerfile: ./services/vector_db/Dockerfile
     networks:
       - rag_network
     # Internal service, accessible at vector_db:8000 within rag_network
     # TODO: implement volume
 
   llm:
-    build: ./services/llm
+    build:
+      context: .
+      dockerfile: ./services/llm/Dockerfile
     networks:
       - rag_network
     depends_on:
@@ -48,9 +58,3 @@ services:
 networks:
   rag_network:
     driver: bridge
-
-logging:
-  driver: json-file
-  options:
-    max-size: "200k"
-    max-file: "10"

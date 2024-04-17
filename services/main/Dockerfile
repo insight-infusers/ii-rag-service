@@ -1,6 +1,6 @@
-FROM python:3.10.11
+FROM python:3.10
 WORKDIR /app
-COPY ./services/main /app
+COPY ./services/main/app /app
 COPY config.py settings.yml .secret.yml /app/
 RUN pip install -r requirements.txt --no-cache-dir --progress-bar=off
 EXPOSE 8000
