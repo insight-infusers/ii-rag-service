@@ -1,7 +1,7 @@
 from dynaconf import Dynaconf
 
 settings = Dynaconf(
-    envvar_prefix="AMV",
+    envvar_prefix="IIRAG",
     settings_files=["settings.yaml", ".secrets.yaml"],
     merge_enabled=True,
 )

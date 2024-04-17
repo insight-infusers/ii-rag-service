@@ -1,39 +1,56 @@
 services:
   main:
     build: ./services/main
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      # TODO: implement healthcheck
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
-      - "3930:8000"
+      - "50000:8000"
     networks:
       - rag_network
 
   embedder:
     build: ./services/embedder
-    ports:
-      - "3931:8000"
     networks:
       - rag_network
+    # Internal service, accessible at embedder:8000 within rag_network
+    # TODO: implement volume
 
   retriever:
     build: ./services/retriever
-    ports:
-      - "3932:8000"
     networks:
       - rag_network
+    depends_on:
+      - embedder
+      - vector_db
+    # Internal service, accessible at retriever:8000 within rag_network
+    # TODO: implement volume
 
   vector_db:
     build: ./services/vector_db
-    ports:
-      - "3933:8000"
     networks:
       - rag_network
+    # Internal service, accessible at vector_db:8000 within rag_network
+    # TODO: implement volume
 
   llm:
     build: ./services/llm
-    ports:
-      - "3934:8000"
     networks:
       - rag_network
+    depends_on:
+      - retriever
+    # Internal service, accessible at llm:8000 within rag_network
+    # TODO: implement volume
 
 networks:
   rag_network:
     driver: bridge
+
+logging:
+  driver: json-file
+  options:
+    max-size: "200k"
+    max-file: "10"
