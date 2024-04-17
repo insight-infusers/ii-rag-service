@@ -1,4 +1,5 @@
 fastapi
+httpx
 uvicorn
 # Placeholder for actual database driver or ORM if applicable
 lancedb

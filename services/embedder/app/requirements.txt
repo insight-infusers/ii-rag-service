@@ -1,4 +1,5 @@
 fastapi
+httpx
 uvicorn
 transformers  # Hugging Face Transformers
 dynaconf

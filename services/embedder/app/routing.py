@@ -1,10 +1,10 @@
 import asyncio
-import logging
-from contextlib import asynccontextmanager
-from http import HTTPStatus
-from typing import Any, AsyncGenerator
-from uuid import uuid4
+from fastapi import APIRouter
+from schema.communication import DocToEmbedRequest, DocEmbedding
 
-from fastapi import APIRouter, FastAPI, HTTPException
+router = APIRouter()
 
-logger = logging.getLogger(__name__)
+@router.post("/embed", response_model=DocEmbedding)
+async def embed_document(doc_request: DocToEmbedRequest):
+    await asyncio.sleep(1)  # Simulate embedding processing time
+    return DocEmbedding(document_id=doc_request.document_id, embedding=[0.1, 0.2, 0.3])
