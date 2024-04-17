@@ -162,3 +162,4 @@ cython_debug/
 # additional
 .secret.yml
 .DS_Store
+*tree
