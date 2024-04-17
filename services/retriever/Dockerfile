@@ -1,6 +1,7 @@
-FROM python:3.10
+FROM python:3.10-slim
 WORKDIR /app
-COPY ./services/retriever/app /app
+COPY ./services/retriever /app
+COPY ./schema /app/schema
 COPY config.py settings.yml .secret.yml /app/
 RUN pip install --no-cache-dir --progress-bar=off -r requirements.txt
 EXPOSE 8000
