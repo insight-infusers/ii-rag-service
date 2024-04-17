@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+openai  # Assuming usage of OpenAI's API
+dynaconf

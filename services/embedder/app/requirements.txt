@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+transformers  # Hugging Face Transformers
+dynaconf
