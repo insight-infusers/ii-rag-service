@@ -16,6 +16,12 @@ class DocEmbedding(BaseModel):
     document_id: str
     embedding: List[float]  # suitable type for embeddings
 
+class Document(BaseModel):
+    """VectorDB → User:
+    VectorDB sends the retrieved document texts to the User."""
+    document_id: str
+    text: str
+
 class UserQueryRequest(BaseModel):
     """User → Retriever:
     User sends a query to the Retriever for searching top relevant documents."""
