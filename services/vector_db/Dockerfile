@@ -2,6 +2,7 @@ FROM python:3.10-slim
 WORKDIR /app
 COPY ./services/vector_db /app
 COPY ./schema /app/schema
+COPY ./core /app/core
 COPY config.py settings.yml .secret.yml /app/
 RUN pip install --no-cache-dir --progress-bar=off -r requirements.txt
 EXPOSE 8000

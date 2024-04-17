@@ -1,3 +1,4 @@
 ---
 title: "RAG_SERVICE"
 version: "0.0.1"
+verbose: false
