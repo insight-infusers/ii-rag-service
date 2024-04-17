@@ -2,7 +2,7 @@ from dynaconf import Dynaconf
 
 settings = Dynaconf(
     envvar_prefix="IIRAG",
-    settings_files=["settings.yaml", ".secrets.yaml"],
+    settings_files=["settings.yml", ".secrets.yml"],
     merge_enabled=True,
 )
 
