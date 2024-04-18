@@ -2,17 +2,17 @@
 # JSON schema for API communication between RAG service components using FastAPI and Pydantic
 
 from pydantic import BaseModel, FilePath
-from typing import List
+from typing import Union, List
 
 class DocToEmbedRequest(BaseModel):
     """DomainSpecificDocuments → Embedder:
-    Embedder receives new documents to process."""
+    Embedder receives new documents to process either as direct text or file path."""
     document_id: str
-    document_path: FilePath
+    document_text_or_path: Union[str, FilePath]
 
 class DocEmbedding(BaseModel):
-    """Embedder → VectorDB:
-    Embedder sends the embeddings to be indexed and stored in VectorDB."""
+    """Embedder → VectorDB OR Embedder → Retriever:
+    Embedder sends the embeddings to be indexed and stored in VectorDB OR retrieved by Retriever."""
     document_id: str
     embedding: List[float]  # suitable type for embeddings
 

@@ -1,4 +1,5 @@
 from transformers import AutoTokenizer, AutoModel
+from typing import List
 
 class EmbeddingEngine:
     def __init__(self, model_name="bert-base-uncased"):
@@ -12,3 +13,5 @@ class EmbeddingEngine:
         # Extract embeddings, for example, mean pooling
         embeddings = outputs.last_hidden_state.mean(dim=1).detach().tolist()[0]
         return embeddings
+    
+    
