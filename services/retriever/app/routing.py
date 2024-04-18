@@ -14,7 +14,7 @@ async def retrieve_documents(query: QueryToEmbedRequest):
         request_json = dict(document_id="234", document_text_or_path=query.dict()["query"])
         logger.info(f'Sending request to Embedder')
         embed_response = await client.post("http://embedder:8000/embed", json=request_json)
-        embed_data = embed_response.dict()
+        embed_data = embed_response.json()
         logger.info(f'Received response from Embedder')
 
         # Send embedding to Vector DB for searching top k documents

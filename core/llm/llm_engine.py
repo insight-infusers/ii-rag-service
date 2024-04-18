@@ -36,7 +36,7 @@ class OpenAILLMEngine:
             raise ValueError(f"Model must be one of {self.AVAILABLE_MODELS}")
         openai.api_key = api_key
         self.model = model
-        self.client = openai.AsyncOpenAI()
+        self.client = openai.AsyncOpenAI(api_key=api_key)
         self.system_prompt = system_prompt
         self.messages = deque([self._create_message(system_prompt, 'system')])
         self.token_limit = self._define_token_overload_threshold(model)

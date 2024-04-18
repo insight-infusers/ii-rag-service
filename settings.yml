@@ -1,4 +1,5 @@
 ---
+model: "gpt-3.5-turbo"
 title: "RAG_SERVICE"
 version: "0.0.1"
 verbose: false
