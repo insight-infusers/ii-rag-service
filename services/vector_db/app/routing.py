@@ -6,7 +6,7 @@ router = APIRouter()
 
 @router.post("/search", response_model=TopKDocumentsResponse)
 async def search_embeddings(query: QueryEmbeddingsForSearch):
-    await asyncio.sleep(1)  # Simulate search processing time
+    await asyncio.sleep(1) # Simulate search processing time
     return TopKDocumentsResponse(document_ids=["doc1", "doc2", "doc3"])
 
 @router.get("/get_text/{document_id}", response_model=Document)
