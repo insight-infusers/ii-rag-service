@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 async def startup_event():
     app.llm_engine = OpenAILLMEngine(
         api_key=settings.OPENAI_API_KEY,
-        model=settings.model,
+        model=settings.LLM_MODEL,
         )
     logger.info("LLM Engine initialized")
     logger.info("Starting up, registering routes...")
