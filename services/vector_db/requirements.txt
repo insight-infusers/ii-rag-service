@@ -1,7 +1,8 @@
+dynaconf
 fastapi
 httpx
-uvicorn
-# Placeholder for actual database driver or ORM if applicable
 lancedb
-# SQLAlchemy or databases might be included if interacting with a relational/vector DB
-dynaconf
+pandas
+sentence_transformers
+torch
+uvicorn

@@ -3,7 +3,7 @@ embedding_model: "text-embedding-3-small"
 llm_model: "gpt-3.5-turbo"
 reranker_model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
 title: "RAG_SERVICE"
-vector_db_path: '.lance'
-vector_db_table_name: null
+vector_db_path: "data/.lancedb"
+vector_db_table_name: "all-mpnet-base-v2_384"
 version: "0.0.1"
 verbose: false

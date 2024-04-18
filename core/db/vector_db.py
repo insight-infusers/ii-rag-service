@@ -29,9 +29,7 @@ class LanceDBEngine(VectorDBEngine):
         self.reranker_model = CrossEncoder(reranker_model, device="cpu")
 
     async def add_document(self, doc_id, text):
-        vector = self.query_model.encode(text, convert_to_numpy=True)
-        self.table.insert({"_id": doc_id, "text": text, "vector": vector})
-        await asyncio.sleep(0)  # simulate async behavior
+        raise NotImplementedError(f'Adding Documents is not supported yet')
 
     async def search(self, query, top_k=20):
         query_vector = self.query_model.encode(query, convert_to_numpy=True)
@@ -49,13 +47,13 @@ class LanceDBEngine(VectorDBEngine):
 async def main(**settings):
     db_engine = LanceDBEngine(
         db_location=settings.get("VECTOR_DB_PATH"),
-        table_name=settings.get("VECTOR_DB_TABLE_NAME", "all-mpnet-base-v2_384.lance")
-        embedder_model=settings.get("EMBEDDING_MODEL", "all-mpnet-base-v2"),
+        table_name=settings.get("VECTOR_DB_TABLE_NAME", "all-mpnet-base-v2_384"),
+        embedder_model="all-mpnet-base-v2",# settings.get("EMBEDDING_MODEL", "all-mpnet-base-v2"),
         reranker_model=settings.get("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
     )
 
     # Adding a document
-    await db_engine.add_document(doc_id="1", text="Example text about AI in healthcare")
+    # await db_engine.add_document(doc_id="1", text="Example text about AI in healthcare")
 
     # Searching
     search_results = await db_engine.search("AI and healthcare", top_k=10)
