@@ -26,12 +26,16 @@ class LLMEngine(ABC):
 
 class OpenAILLMEngine:
     AVAILABLE_MODELS = {
-        'gpt-4': 4096,
-        'gpt-3.5-turbo': 4096
+        'gpt-4': 8_192,
+        'gpt-4-turbo': 128_000,
+        'gpt-4-32k': 32_768,
+        'gpt-4-turbo-preview': 128_000,
+        'gpt-3.5-turbo': 16_385,
+        'gpt-3.5-turbo-0125': 16_385
         }
     MIN_QUEUE_LENGTH = 2
 
-    def __init__(self, api_key: str, model: str = 'gpt-4', system_prompt: str = ''):
+    def __init__(self, api_key: str, model: str = 'gpt-3.5-turbo', system_prompt: str = ''):
         if model not in self.AVAILABLE_MODELS:
             raise ValueError(f"Model must be one of {self.AVAILABLE_MODELS}")
         openai.api_key = api_key
