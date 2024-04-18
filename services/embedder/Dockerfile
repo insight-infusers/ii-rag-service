@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 WORKDIR /app
-COPY ./services/vector_db /app
+COPY ./services/embedder /app
 COPY ./schema /app/schema
 
 COPY ./core /app/core
